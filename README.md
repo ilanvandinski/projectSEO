@@ -1,20 +1,21 @@
 # SEO Game
-Play the first Search Engine Optimization game!
+* Play the first Search Engine Optimization game!
 
-clone the repo
-go into repo
+* clone the repo
+* go into repo
 
-bundle
+* bundle
 
-git branch react
-git checkout react
+* git branch react
+* git checkout react
 
-YARN:
-yarn add react
-yarn add react-dom
-yarn add recharts
-yarn add react-fittext
-yarn add react-bootstrap
+* yarn install
 
-server 1 : rails s
-server 2 : ./bin/webpack-dev-server --host 127.0.0.1
+* yarn add react
+* yarn add react-dom
+* yarn add recharts
+* yarn add react-fittext
+* yarn add react-bootstrap
+
+* server 1 : rails s
+* server 2 : ./bin/webpack-dev-server --host 127.0.0.1
