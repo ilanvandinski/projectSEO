@@ -4,7 +4,7 @@
 //NEED TO PUT BACK this.state.week ETC IN RENDER
 
 
-import React from 'react'
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Legend, Bar } from 'recharts'
 import ReactFitText from 'react-fittext'
@@ -411,27 +411,38 @@ const chartOptions = {
 //
 // }
 
-var state = {
-  week: week,
-  kpi: 'Visits',
-  evoData: evoData,
-  segData: segData,
-  selected_kpi: 'visits',
-  seoCourse: "Hi SEO GUY, I'm your SEO teacher.",
-  seoConclusion: "Please, select a KPI on the right panel to analyze it on the charts below.",
-  kpiTextDefTag: '',
-  kpiTextToDoTag: '',
-  kpiTextDef: '',
-  kpiTextToDo: '',
-  bossIntro: bossText.start.intro,
-  bossText: bossText.start.begin,
-  bossConslusion: bossText.start.end,
-  marketIntro: "Hello SEO GUY, I'm the Marketing Girl.",
-  marketText: "What do you want to do?",
-}
-// console.log(state.week)
-
-const missionTab = event => {
+export default class Boss_Start extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            seoCourse: "Hi SEO GUY, I'm your SEO teacher.",
+            seoConclusion: "Please, select a KPI on the right panel to analyze it on the charts below.",
+            kpiTextDefTag: '',
+            kpiTextToDoTag: '',
+            kpiTextDef: '',
+            kpiTextToDo: '',
+            bossIntro: bossText.start.intro,
+            bossText: bossText.start.begin,
+            bossConslusion: bossText.start.end,
+            marketIntro: "Hello SEO GUY, I'm the Marketing Girl.",
+            marketText: "What do you want to do?",
+        };
+        this.goToNextWeek = this.goToNextWeek.bind(this);
+        this.missionTab = this.missionTab.bind(this);
+        this.analysisTab = this.analysisTab.bind(this);
+        this.marketingTab = this.marketingTab.bind(this);
+        this.techTab = this.techTab.bind(this);
+        this.nextweekTab = this.nextweekTab.bind(this);
+        this.supportTab = this.supportTab.bind(this);
+        this.displayEVO = this.displayEVO.bind(this);
+    }
+    missionTab(event) {
         this.setState({
             week: week,
             kpi: 'Visits',
@@ -440,144 +451,168 @@ const missionTab = event => {
             selected_kpi: 'visits',
             key: 'first'
         });
-}
+    }
+    analysisTab (event) {
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'second'
+        });
+    }
+    marketingTab(event) {
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'third'
+        });
+    }
 
-const analysisTab = event => {
-    this.setState({
-        week: week,
-        kpi: 'Visits',
-        evoData: evoData,
-        segData: segData,
-        selected_kpi: 'visits',
-        key: 'second'
-    });
-}
+    techTab(event) {
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'fourth'
+        });
+    }
+    nextweekTab(event) {
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'fith'
+        });
+    }
+    supportTab(event) {
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'sixth'
+        });
+    }
 
-const marketingTab = event => {
-    this.setState({
-        week: week,
-        kpi: 'Visits',
-        evoData: evoData,
-        segData: segData,
-        selected_kpi: 'visits',
-        key: 'third'
-    });
-}
+    goToNextWeek(event) {
 
-const techTab = event => {
-    this.setState({
-        week: week,
-        kpi: 'Visits',
-        evoData: evoData,
-        segData: segData,
-        selected_kpi: 'visits',
-        key: 'fourth'
-    });
-}
+      //Calculate new segData KPIs
 
-const nextweekTab = event => {
-    this.setState({
-        week: week,
-        kpi: 'Visits',
-        evoData: evoData,
-        segData: segData,
-        selected_kpi: 'visits',
-        key: 'fith'
-    });
-}
+      console.log("segData");
+      console.log(segData);
 
-const supportTab = event => {
-    this.setState({
-        week: week,
-        kpi: 'Visits',
-        evoData: evoData,
-        segData: segData,
-        selected_kpi: 'visits',
-        key: 'sixth'
-    });
-}
+      segData[0]['visits'] = Math.round(segData[0].visits + 0.3 * Math.random() * segData[0].visits);
+      segData[1]['visits'] = Math.round(segData[1].visits + 0.3 * Math.random() * segData[1].visits);
+      segData[2]['visits'] = Math.round(segData[2].visits + 0.3 * Math.random() * segData[2].visits);
 
-const goToNextWeek = event => {
+      segData[0]['active_pages'] = Math.round(segData[0].active_pages + 0.1 * Math.random() * segData[0].active_pages);
+      segData[1]['active_pages'] = Math.round(segData[1].active_pages + 0.1 * Math.random() * segData[1].active_pages);
+      segData[2]['active_pages'] = Math.round(segData[2].active_pages + 0.1 * Math.random() * segData[2].active_pages);
 
-  //Calculate new segData KPIs
+      segData[0]['pages'] = Math.round(segData[0].pages + 0.3 * Math.random() * segData[0].pages);
+      segData[1]['pages'] = Math.round(segData[1].pages + 0.3 * Math.random() * segData[1].pages);
+      segData[2]['pages'] = Math.round(segData[2].pages + 0.3 * Math.random() * segData[2].pages);
 
-  console.log("segData");
-  console.log(segData);
+      console.log(segData);
 
-  segData[0]['visits'] = Math.round(segData[0].visits + 0.3 * Math.random() * segData[0].visits);
-  segData[1]['visits'] = Math.round(segData[1].visits + 0.3 * Math.random() * segData[1].visits);
-  segData[2]['visits'] = Math.round(segData[2].visits + 0.3 * Math.random() * segData[2].visits);
+      //Push new KPIs Arrays
 
-  segData[0]['active_pages'] = Math.round(segData[0].active_pages + 0.1 * Math.random() * segData[0].active_pages);
-  segData[1]['active_pages'] = Math.round(segData[1].active_pages + 0.1 * Math.random() * segData[1].active_pages);
-  segData[2]['active_pages'] = Math.round(segData[2].active_pages + 0.1 * Math.random() * segData[2].active_pages);
+      visitsData.push(segData[0].visits + segData[1].visits + segData[2].visits);
+      activePagesData.push(segData[0].active_pages + segData[1].active_pages + segData[2].active_pages);
+      pagesData.push(segData[0].pages + segData[0].pages + segData[2].pages);
 
-  segData[0]['pages'] = Math.round(segData[0].pages + 0.3 * Math.random() * segData[0].pages);
-  segData[1]['pages'] = Math.round(segData[1].pages + 0.3 * Math.random() * segData[1].pages);
-  segData[2]['pages'] = Math.round(segData[2].pages + 0.3 * Math.random() * segData[2].pages);
+      //Update Week and Week Labels
+      week = this.state.week + 1;
 
-  console.log(segData);
+      evoData = [];
 
-  //Push new KPIs Arrays
+      for (var i = 0; i < week ; i++) {
+        evoData.push({
+          name:"Week " + (i+1),
 
-  visitsData.push(segData[0].visits + segData[1].visits + segData[2].visits);
-  activePagesData.push(segData[0].active_pages + segData[1].active_pages + segData[2].active_pages);
-  pagesData.push(segData[0].pages + segData[0].pages + segData[2].pages);
+          visits: visitsData[i],
+          active_pages: activePagesData[i],
 
-  //Update Week and Week Labels
-  week = this.state.week + 1;
+          visits_by_active_pages: 0,
 
-  evoData = [];
+          indexable_ratio: 0,
+          active_ratio_oncomp: 0,
+          crawl_ratio_oncomp: 0,
 
-  for (var i = 0; i < week ; i++) {
-    evoData.push({
-      name:"Week " + (i+1),
+          pages: pagesData[i],
+          comp_pages: 0,
+          notcomp_pages: 0,
 
-      visits: visitsData[i],
-      active_pages: activePagesData[i],
+          crawled_comp_pages: 0,
+          notcrawled_comp_pages: 0,
 
-      visits_by_active_pages: 0,
+          crawled_notcomp_pages: 0,
+          notcrawled_notcomp_pages: 0,
 
-      indexable_ratio: 0,
-      active_ratio_oncomp: 0,
-      crawl_ratio_oncomp: 0,
+          avg_loadtimes: 0,
+          avg_depth: 0,
+          avg_badhttp: 0,
+          avg_inlinks: 0,
 
-      pages: pagesData[i],
-      comp_pages: 0,
-      notcomp_pages: 0,
-
-      crawled_comp_pages: 0,
-      notcrawled_comp_pages: 0,
-
-      crawled_notcomp_pages: 0,
-      notcrawled_notcomp_pages: 0,
-
-      avg_loadtimes: 0,
-      avg_depth: 0,
-      avg_badhttp: 0,
-      avg_inlinks: 0,
-
-      avg_words: 0,
-      avg_unicity: 0,
-      pct_duptitles: 0,
-      pct_duph1: 0,
-      pct_dupdesc: 0,
-      pct_similarity: 0
-    });
-  }
-}
-
-const Hello = props => (
-  <div>
-    <Row className="top-div">
-        <Col xs={2} className="logo">
-            <center><h1>SEO GUY</h1></center>
-        </Col>
-        <Col xs={10} className="top-bar">
-            <span>Week #{state.week}</span>
-        </Col>
-    </Row>
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first" activeKey={state.key}>
+          avg_words: 0,
+          avg_unicity: 0,
+          pct_duptitles: 0,
+          pct_duph1: 0,
+          pct_dupdesc: 0,
+          pct_similarity: 0
+        });
+      }
+        this.setState({
+            week: week,
+            kpi: 'Visits',
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: 'visits',
+            key: 'first'
+        });
+    }
+    displayEVO(event, name, selectedkpi, kpiValue, kpiTextDef, kpiTextToDo) {
+    
+        this.setState({
+            week: week,
+            kpi: name,
+            kpiValue: kpiValue,
+            evoData: evoData,
+            segData: segData,
+            selected_kpi: selectedkpi,
+            seoCourse: name + ':',
+            seoConclusion: '',
+            kpiTextDefTag: '',
+            kpiTextToDoTag: '',
+            kpiTextDef: kpiTextDef,
+            kpiTextToDo: kpiTextToDo,
+        });
+    };
+    
+    
+    render() {
+    return (
+        <div>
+            <h1>BOSS COMPONENT</h1>
+            <Row className="top-div">
+                <Col xs={2} className="logo">
+                    <center><h1>SEO GUY</h1></center>
+                </Col>
+                <Col xs={10} className="top-bar">
+                    <span>Week #{this.state.week}</span>
+                </Col>
+            </Row>
+    <Tab.Container id="left-tabs-example" defaultActiveKey="first" activeKey={this.state.key}>
         <Row className="clearfix main-div">
           <Col xs={2} className="sidebar">
             <Nav bsStyle="pills" stacked>
@@ -603,11 +638,11 @@ const Hello = props => (
                                        </Col>
                                        <Col xs={8} className="box-2">
                                         <p className="guytext-2">
-                                           <span className="indicator">{state.bossIntro}</span>
+                                           <span className="indicator">{this.state.bossIntro}</span>
                                            <br/><br/>
-                                           <span className="indicator">{state.bossText}</span>
+                                           <span className="indicator">{this.state.bossText}</span>
                                            <br/><br/>
-                                           <span className="indicator">{state.bossConslusion}</span>
+                                           <span className="indicator">{this.state.bossConslusion}</span>
                                         </p>
                                        </Col>
                                    </Row>
@@ -616,11 +651,11 @@ const Hello = props => (
                             </Col>
                             <Col md={12} lg={6}>
                                 <div className="left-1">
-                                <h3 className="kpi"><span className="tag">Visits</span><br/>{state.evoData[state.week-1].visits} +X%</h3>
+                                <h3 className="kpi"><span className="tag">Visits</span><br/>{this.state.evoData[this.state.week-1].visits} +X%</h3>
 
                                    <div className="box-4">
                                        <ResponsiveContainer height={110}>
-                                        <AreaChart data={state.evoData}
+                                        <AreaChart data={this.state.evoData}
                                             margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                                           <XAxis dataKey="name"/>
                                           <YAxis/>
@@ -641,7 +676,7 @@ const Hello = props => (
 
                                     <div className="box-3">
 
-                                        <h4><span className="bold">Deadline:</span> You have {12 - state.week} months left to generate 36K visits per month.</h4>
+                                        <h4><span className="bold">Deadline:</span> You have {12 - this.state.week} months left to generate 36K visits per month.</h4>
                                         <br/>
 
                                         <h4><span className="bold">Resources:</span> You have 4 credits left to spend this month on marketing or technical SEO tasks.</h4>
@@ -654,7 +689,7 @@ const Hello = props => (
                                 <h3>Visits, by templates</h3>
                                     <div className="box-3">
                                     <ResponsiveContainer height={230}>
-                                        <BarChart data={state.segData}>
+                                        <BarChart data={this.state.segData}>
                                           <XAxis dataKey="name" />
                                           <YAxis />
                                           <CartesianGrid strokeDasharray="3 3" />
@@ -681,11 +716,11 @@ const Hello = props => (
                                        <Col xs={8} className="box-2">
 
                                             <p className="guytext-2">
-                                                <h4>{state.kpiTextDefTag}</h4>
-                                                <span className="indicator">{state.seoCourse}</span> {state.kpiTextDef}
+                                                <h4>{this.state.kpiTextDefTag}</h4>
+                                                <span className="indicator">{this.state.seoCourse}</span> {this.state.kpiTextDef}
                                                 <br/>
-                                                <h4>{state.kpiTextToDoTag}</h4> {state.kpiTextToDo}
-                                                <span className="indicator">{state.seoConclusion}</span>
+                                                <h4>{this.state.kpiTextToDoTag}</h4> {this.state.kpiTextToDo}
+                                                <span className="indicator">{this.state.seoConclusion}</span>
                                             </p>
 
 
@@ -703,8 +738,8 @@ const Hello = props => (
 
                                     <Tab eventKey={1} title="Main">
                                         <ButtonToolbar className="kpis-tab">
-                                          <Button bsStyle="default" bsSize="large" className="kpibut-2" onClick={event => this.displayEVO(event,'Visits','visits', state.evoData[week-1].visits, kpiTextData.visits.def, kpiTextData.visits.todo)}>Visits</Button>
-                                          <Button bsStyle="default" bsSize="large" className="kpibut-2" onClick={event => this.displayEVO(event,'Pages', 'pages', state.evoData[week-1].pages, kpiTextData.pages.def, kpiTextData.pages.todo)}>Pages</Button>
+                                          <Button bsStyle="default" bsSize="large" className="kpibut-2" onClick={event => this.displayEVO(event,'Visits','visits', this.state.evoData[week-1].visits, kpiTextData.visits.def, kpiTextData.visits.todo)}>Visits</Button>
+                                          <Button bsStyle="default" bsSize="large" className="kpibut-2" onClick={event => this.displayEVO(event,'Pages', 'pages', this.state.evoData[week-1].pages, kpiTextData.pages.def, kpiTextData.pages.todo)}>Pages</Button>
                                         </ButtonToolbar>
                                         <ButtonToolbar className="kpis-tab">
                                           <Button bsStyle="default" bsSize="large" className="kpibut-3" onClick={event => this.displayEVO(event,'Indexability Ratio', 'pages')}>Indexability Ratio</Button>
@@ -760,17 +795,17 @@ const Hello = props => (
                         <Row className="show-grid">
                             <Col md={12} lg={6}>
                                 <div className="left-1">
-                                <h3 className="kpi"><span className="tag">{state.kpi}</span><br/>{state.kpiValue} +X%</h3>
+                                <h3 className="kpi"><span className="tag">{this.state.kpi}</span><br/>{this.state.kpiValue} +X%</h3>
 
                                    <div className="box-4">
                                        <ResponsiveContainer height={110}>
-                                        <AreaChart data={state.evoData}
+                                        <AreaChart data={this.state.evoData}
                                             margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                                           <XAxis dataKey="name"/>
                                           <YAxis/>
                                           <CartesianGrid strokeDasharray="3 3"/>
                                           <Tooltip/>
-                                          <Area type='monotone' dataKey={state.selected_kpi} stroke='#000' fill='#000' />
+                                          <Area type='monotone' dataKey={this.state.selected_kpi} stroke='#000' fill='#000' />
                                         </AreaChart>
                                     </ResponsiveContainer>
                                    </div>
@@ -780,16 +815,16 @@ const Hello = props => (
                             </Col>
                             <Col md={12} lg={6}>
                                 <div className="left-1">
-                                <h3>{state.kpi}, by templates</h3>
+                                <h3>{this.state.kpi}, by templates</h3>
                                     <div className="box-3">
                                     <ResponsiveContainer height={230}>
-                                        <BarChart data={state.segData}>
+                                        <BarChart data={this.state.segData}>
                                           <XAxis dataKey="name" />
                                           <YAxis />
                                           <CartesianGrid strokeDasharray="3 3" />
                                           <Tooltip />
 
-                                          <Bar dataKey={state.selected_kpi} fill="#000" />
+                                          <Bar dataKey={this.state.selected_kpi} fill="#000" />
                                         </BarChart>
                                     </ResponsiveContainer>
                                     </div>
@@ -811,11 +846,11 @@ const Hello = props => (
                                        <Col xs={8} className="box-2">
 
                                         <p className="guytext-2">
-                                           <span className="indicator">{state.marketIntro}</span>
+                                           <span className="indicator">{this.state.marketIntro}</span>
                                            <br/><br/>
-                                           <span className="indicator">{state.marketText}</span>
+                                           <span className="indicator">{this.state.marketText}</span>
                                            <br/><br/>
-                                           <span className="indicator">{state.marketConslusion}</span>
+                                           <span className="indicator">{this.state.marketConslusion}</span>
                                         </p>
 
 
@@ -863,11 +898,11 @@ const Hello = props => (
                                        <Col xs={8} className="box-2">
 
                                             <p className="guytext-2">
-                                                <h4>{state.kpiTextDefTag}</h4>
-                                                <span className="indicator">{state.seoCourse}</span> {state.kpiTextDef}
+                                                <h4>{this.state.kpiTextDefTag}</h4>
+                                                <span className="indicator">{this.state.seoCourse}</span> {this.state.kpiTextDef}
                                                 <br/>
-                                                <h4>{state.kpiTextToDoTag}</h4> {state.kpiTextToDo}
-                                                <span className="indicator">{state.seoConclusion}</span>
+                                                <h4>{this.state.kpiTextToDoTag}</h4> {this.state.kpiTextToDo}
+                                                <span className="indicator">{this.state.seoConclusion}</span>
                                             </p>
 
 
@@ -909,16 +944,22 @@ const Hello = props => (
                             <Button bsStyle="primary" bsSize="large" className="nextbutton"  onClick={event => this.goToNextWeek(event)} >Go To The Next Week!</Button>
                         </ButtonToolbar>
                 </Tab.Pane>
-            </Tab.Content>
-          </Col>
+              </Tab.Content>
+            </Col>
         </Row>
-    </Tab.Container>
-  </div>
-)
+    </Tab.Container>         
+</div>
+        
+    );
+    }
+    
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <Boss_Start />,
     document.body.appendChild(document.createElement('div')),
   )
 })
+
